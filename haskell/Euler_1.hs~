@@ -1,4 +1,0 @@
-sumOfDivs n = sum [i | i <- [1..n], ((i `mod` 3) == 0) || ((i `mod` 5) == 0)]
-
-main = do
-    print(sumOfDivs 999)
