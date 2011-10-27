@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1260738133 source:c:\documents and settings\jordan\my documents\c++\project euler\factors\main.cpp
+	<iostream>
+	<cmath>
+

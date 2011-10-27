@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1254605406 source:c:\documents and settings\jordan\my documents\c - c++\project euler\euler_29\main.cpp
+	<iostream>
+	<vector>
+	<cmath>
+

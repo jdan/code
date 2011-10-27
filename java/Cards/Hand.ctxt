@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=n
+comment0.target=Hand(int)
+comment1.target=String\ toString()
+comment2.target=void\ sort()
+comment3.target=boolean\ hasPair()
+comment4.params=n
+comment4.target=void\ draw(int)
+comment5.params=c
+comment5.target=boolean\ find(Card)
+comment6.params=id
+comment6.target=boolean\ find(int)
+numComments=7

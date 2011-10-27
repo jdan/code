@@ -1,0 +1,8 @@
+(define (factor n)
+  (if (list? n)
+      (if (= (car n) (cadr n))
+          (list (car n))
+          (if (= (modulo (car n) (cadr n)) 0)
+              (cons (cadr n) (factor (list (/ (car n) (cadr n)) 2)))
+              (factor (list (car n) (+ (cadr n) 1)))))
+      (factor (list n 2))))

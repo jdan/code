@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1258268228 source:c:\documents and settings\jordan\my documents\c++\hax\main.cpp
+	<iostream>
+	<dos.h>
+	<windows.h>
+	<winuser.h>
+

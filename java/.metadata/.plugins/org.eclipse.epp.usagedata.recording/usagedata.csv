@@ -1,0 +1,7 @@
+what,kind,bundleId,bundleVersion,description,time
+stopped,bundle,org.python.pydev.customizations,1.6.0.2010071813,"org.python.pydev.customizations",1279938706169
+stopped,bundle,org.python.pydev.debug,1.6.0.2010071813,"org.python.pydev.debug",1279938706169
+stopped,bundle,org.python.pydev.red_core,1.6.0.2010071813,"org.python.pydev.red_core",1279938706169
+stopped,bundle,org.python.pydev.refactoring,1.6.0.2010071813,"org.python.pydev.refactoring",1279938706169
+stopped,bundle,org.python.pydev,1.6.0.2010071813,"org.python.pydev",1279938706232
+stopped,bundle,org.eclipse.jdt.ui,3.6.0.v20100602-1600,"org.eclipse.jdt.ui",1279938706951

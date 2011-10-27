@@ -1,0 +1,6 @@
+(define (max ls)
+   (if (null? (cdr ls))
+      (car ls)
+      (if (> (car ls) (max (cdr ls)))
+          (car ls)
+          (max (cdr ls)))))

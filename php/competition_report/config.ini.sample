@@ -1,0 +1,10 @@
+[database]
+host = 127.0.0.1
+database = ba
+username = root
+password = 
+
+[CompetitionReport]
+subject = Competition Report for the week of 
+from = scripts@evidon.com
+address[] = jscales@evidon.com

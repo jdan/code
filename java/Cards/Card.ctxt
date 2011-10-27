@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Card()
+comment1.target=int\ getID()
+comment2.target=String\ getNum()
+comment3.target=String\ getSuit()
+comment4.target=int\ getCount()
+comment5.params=c
+comment5.target=int\ compareTo(Card)
+comment6.target=String\ toString()
+numComments=7

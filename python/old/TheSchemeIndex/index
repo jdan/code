@@ -1,0 +1,5 @@
+gcd(a, b)@gcd@Computes the greatest common divisor between a and b@jscales
+factorial(n)@factorial@Evaluates x! for a given x@jscales
+sum(ls)@sum@Sums a list of numbers@jscales
+factor(n)@factor@Factors a number into its prime components@jscales
+fib(n)@fib@Computes the nth number in the Fibonacci sequence@jscales

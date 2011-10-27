@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+
+public class Euler_23 {
+
+    static ArrayList<Integer> a;
+    
+    public static void main (String [] args) {
+	a = new ArrayList<Integer>();
+	// make an arraylist of abundant numbers
+	for (int i = 1; i <= 28123; i++) 
+	    if (isAbundant(i)) a.add(i);
+
+	int t = 0;
+
+	for (int n = 1; n <= 28123; n++) {
+	    System.out.println(n);
+	    int index = 0;
+	    while (a.get(index) < n && index < a.size()) index++;
+	    index--;
+	    boolean canBeMade = false;
+	    while (index >= 0) {
+		if (a.indexOf(n - a.get(index).intValue()) > -1) {
+		    canBeMade = true;
+		}
+
+		index--;
+	    }
+
+	    if (!canBeMade) t += n;
+	}
+
+	System.out.println("Answer: " + t);
+    }
+
+    public static boolean isAbundant(int n) {
+	int total = 0;	
+	for (int i = 1; i < Math.floor(Math.sqrt(n)) + 1; i++) {
+	    if (n % i == 0) {
+		total += i;
+		if (i != n/i) total += n / i;
+	    }
+	}
+
+	return total > n;
+    }
+
+}
