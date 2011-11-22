@@ -5,7 +5,8 @@
 (define (max-consec-product n dist)
   (if (= n 0)
       0
-      (max (n-digit-product n dist) (max-consec-product (floor (/ n 10)) dist))))
+      (max (n-digit-product n dist) 
+           (max-consec-product (floor (/ n 10)) dist))))
 
 (define (n-digit-product i n)
   (if (= n 0)
