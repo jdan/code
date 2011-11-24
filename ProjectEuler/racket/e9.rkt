@@ -8,6 +8,8 @@
 ;; 2m^2 + 2mn = 1000
 ;; m(m+n) = 500
 ;; 500/m - m = n
+;;
+;; find integer n such that m > n
 
 (define (find-mn limit)
   (fmn-helper (/ limit 2) 1))
