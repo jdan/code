@@ -55,20 +55,20 @@ def main():
         
     p = prime_list(n)   # get a prime list (to use later)
     k = find_sequence(0, 0, 1)  # call find_sequence initially
-    result = ''
+    result = []
     
-    # decode k
-    # find_sequence will return a product of primes
-    #    so we can easily identify which items we used to achieve a sum of 0
-    for i, prime in enumerate(p):
-        if not k % prime:
-            k /= prime
-            result += cases[i][0] + '\n'
-            
-    if result == '':
-        print 'no solution' # we found nothing :(
+    if k == 0:
+        result = ['no solution']
     else:
-        print result
+        # decode k
+        # find_sequence will return a product of primes
+        #    so we can easily identify which items we used to achieve a sum of 0
+        for i, prime in enumerate(p):
+            if not k % prime:
+                k /= prime
+                result.append(cases[i][0])
+        
+    print '\n'.join(result)
     
 if __name__ == '__main__':
     main()
