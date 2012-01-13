@@ -17,12 +17,12 @@ print "\n",def_msg
 
 # Send messages
 while (1):
-	data = raw_input('>> ')
-	if not data:
-		break
-	else:
-		if(UDPSock.sendto(data + "@" + user, addr)):
-			print 'Message sent to %s...' % host
+    data = raw_input('>> ')
+    if not data:
+        break
+    else:
+        if(UDPSock.sendto(data + "@" + user, addr)):
+            print 'Message sent to %s...' % host
 
 # Close socket
 UDPSock.close()

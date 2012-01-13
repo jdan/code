@@ -1,8 +1,8 @@
 import sys
 
 if len(sys.argv) <> 2:
-	print 'Please enter a sequence of characters to permutate.'
-	sys.exit(0)
+    print 'Please enter a sequence of characters to permutate.'
+    sys.exit(0)
 
 letters = sys.argv[1]
 s = len(letters)

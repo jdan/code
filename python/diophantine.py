@@ -12,5 +12,5 @@ print '%sx - %sy = 1' % (x, y)
 print 'x = %s, y = %s' % (res[1], res[0])
 
 if len(argv) == 2:
-	if int(argv[1]) == 1:
-		print 'Error: %s' % (x * res[1] - y * res[0] - 1)
+    if int(argv[1]) == 1:
+        print 'Error: %s' % (x * res[1] - y * res[0] - 1)
