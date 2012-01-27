@@ -3,3 +3,6 @@ factorial(n)@factorial@Evaluates x! for a given x@jscales
 sum(ls)@sum@Sums a list of numbers@jscales
 factor(n)@factor@Factors a number into its prime components@jscales
 fib(n)@fib@Computes the nth number in the Fibonacci sequence@jscales
+upto(n)@upto@Produces a list of integers from 1 to n@jscales
+pi-estimate(n)@pi-estimate@Estimates pi fairly accurately, computing to a given n@jscales
+look-and-say(n)@look-and-say@Returns the nth element from Conway's "look-and-say" sequence@jscales
