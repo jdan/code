@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Julia Set generator by Jordan Scales
 # 12/02/2009
 
