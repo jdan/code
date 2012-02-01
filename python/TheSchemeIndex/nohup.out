@@ -1,0 +1,23 @@
+Bottle server starting up (using WSGIRefServer())...
+Listening on http://192.168.1.5:7777/
+Use Ctrl-C to quit.
+
+Traceback (most recent call last):
+  File "main.py", line 256, in <module>
+    run(host='192.168.1.5', port='7777')
+  File "/home/jordan/TheSchemeIndex/bottle.py", line 1651, in run
+    server.run(app)
+  File "/home/jordan/TheSchemeIndex/bottle.py", line 1397, in run
+    srv = make_server(self.host, self.port, handler, **self.options)
+  File "/usr/lib/python2.6/wsgiref/simple_server.py", line 181, in make_server
+    server = server_class((host, port), handler_class)
+  File "/usr/lib/python2.6/SocketServer.py", line 400, in __init__
+    self.server_bind()
+  File "/usr/lib/python2.6/wsgiref/simple_server.py", line 50, in server_bind
+    HTTPServer.server_bind(self)
+  File "/usr/lib/python2.6/BaseHTTPServer.py", line 108, in server_bind
+    SocketServer.TCPServer.server_bind(self)
+  File "/usr/lib/python2.6/SocketServer.py", line 411, in server_bind
+    self.socket.bind(self.server_address)
+  File "<string>", line 1, in bind
+socket.error: [Errno 99] Cannot assign requested address
