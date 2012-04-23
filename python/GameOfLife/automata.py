@@ -44,7 +44,7 @@ def output(m):
         for b in a:
             t = ' '
             if b == 1:
-                t = 'X'
+                t = '\033[44m \033[0m'
             s += t + ' '
         s += '\n'
     print s
