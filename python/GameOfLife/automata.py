@@ -45,7 +45,7 @@ def output(m):
             t = ' '
             if b == 1:
                 t = '\033[44m \033[0m'
-            s += t + ' '
+            s += t * 2 
         s += '\n'
     print s
 
