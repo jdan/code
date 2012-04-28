@@ -6,6 +6,7 @@
 pt
 cs181
 ProjectEuler
+*.in
 *.out
 node_modules
 qsort
