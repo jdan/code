@@ -1,2 +1,0 @@
-human(john).
-human(jordan).
