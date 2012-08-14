@@ -1,15 +1,28 @@
 valid([]).
-valid([Head|Tail]) :- member(Head, [a,b,c,d,e]), valid(Tail).
+valid([Head|Tail]) :- member(Head, [a,b,c]), valid(Tail).
 
 index(0, I, [I|_]) :- !.
 index(N, I, [Head|Tail]) :- index(NN, I, Tail), !, N is NN + 1.
 
-solution(Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15, Q16, Q17, Q18, Q19, Q20) :-
+question1(a, b).
+question1(b, c).
+question1(c, a).
 
-  A = [Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15, Q16, Q17, Q18, Q19, Q20],
+question2(a, A) :- index(2, b, A).
+question2(b, A) :- index(0, b, A).
+question2(c, A) :- index(1, b, A).
 
-  valid(),
+question3(a, A) :- index(N, a, A), N >= 2.
+question3(b, A) :- index(N, b, A), N >= 2.
+question3(c, A) :- index(N, c, A), N >= 2.
 
-  % the first question whose answer is B is...
-  answer(Q1, a) :- index(0, b, 
-  answer(Q2, b) :- Q1 \= b, Q2 = b,
+solution(Q1, Q2, Q3) :-
+
+  SolArr = [Q1, Q2, Q3],
+
+  valid(SolArr),
+
+  question1(Q1, Q2),
+  question2(Q2, SolArr),
+  question3(Q3, SolArr).
+
