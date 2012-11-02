@@ -10,3 +10,5 @@ ProjectEuler
 *.out
 node_modules
 qsort
+koans
+stripCTF
