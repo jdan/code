@@ -12,3 +12,6 @@ node_modules
 qsort
 koans
 stripeCTF
+*.hi
+*.o
+main
