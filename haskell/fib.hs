@@ -10,6 +10,8 @@ fibFirst (x, _, _) = x
 fib :: Integer -> Integer
 fib n = (fibFirst . fibTuple) (0, 1, n)
 
+res = [fib x | x <- [1..100]]
+
 main :: IO ()
 main = do
-  print (fib 10)
+  print res
