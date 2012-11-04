@@ -2,7 +2,7 @@
 -- Jordan Scales
 -- 2 November 2012
 
-module BinaryTree(insert, height, arrayToBST) where
+module BinaryTree(BinaryTree(Node, EmptyTree), insert, height, arrayToBST, isLeaf, findMax, removeMax) where
 
 -- we'll treat it as a `binary search tree`
 data BinaryTree a = Node a (BinaryTree a) (BinaryTree a) |
