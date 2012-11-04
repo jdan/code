@@ -29,9 +29,9 @@ entrySort (pivot:xs) = (entrySort lessThan) ++ [pivot] ++ (entrySort greaterThan
         greaterThan = [e | e <- xs, (snd e) >= (snd pivot)]
 
 -- converts a list of entries to a list of binary trees
-makeEntryTree :: [Entry] -> [BinaryTree Entry]
-makeEntryTree []     = []
-makeEntryTree (x:xs) = (Node x EmptyTree EmptyTree) : makeEntryTree xs
+makeEntryLeaves :: [Entry] -> [BinaryTree Entry]
+makeEntryLeaves []     = []
+makeEntryLeaves (x:xs) = (Node x EmptyTree EmptyTree) : makeEntryLeaves xs
 
 -- combines the first two elements and returns a new tree list
 -- not safe, BinaryTree's have to be Node's
@@ -51,4 +51,11 @@ combine ((Node e1 l1 r1):(Node e2 l2 r2):rest) = mergeInto newNode rest
 formTree :: [BinaryTree Entry] -> [BinaryTree Entry]
 formTree (e:[]) = [e]
 formTree ls = formTree (combine ls)
+
+makeDictionary :: BinaryTree Entry -> [(Char, [Char])]
+makeDictionary tree = makeDictionary' tree []
+  where makeDictionary' EmptyTree c = []
+        makeDictionary' (Node val EmptyTree EmptyTree) c = [((head . fst) val, c)]
+        makeDictionary' (Node _ left right) c = (makeDictionary' left (c ++ "0")) ++ (makeDictionary' right (c ++ "1"))
+
 
