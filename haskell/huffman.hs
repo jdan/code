@@ -1,4 +1,4 @@
--- Huffman Encoding Module
+-- Huffman Coding Module
 -- by Jordan Scales
 -- 4 November 2012
 
@@ -6,6 +6,7 @@ module Huffman where
 import BinaryTree
 
 type Entry = ([Char], Integer)
+type Dictionary = [(Char, [Char])]
 
 -- computes the frequency of each letter in a given string
 letterFrequency :: [Char] -> [Entry]
@@ -52,10 +53,34 @@ formTree :: [BinaryTree Entry] -> [BinaryTree Entry]
 formTree (e:[]) = [e]
 formTree ls = formTree (combine ls)
 
-makeDictionary :: BinaryTree Entry -> [(Char, [Char])]
+-- forms a reference dictionary from a Huffman Tree
+makeDictionary :: BinaryTree Entry -> Dictionary
 makeDictionary tree = makeDictionary' tree []
   where makeDictionary' EmptyTree c = []
         makeDictionary' (Node val EmptyTree EmptyTree) c = [((head . fst) val, c)]
         makeDictionary' (Node _ left right) c = (makeDictionary' left (c ++ "0")) ++ (makeDictionary' right (c ++ "1"))
 
+-- given a dictionary, translates a string into an optimal bit sequence
+translate :: Dictionary -> [Char] -> [Char]
+translate _ [] = []
+translate d (x:xs) = (translateChar d x) ++ (translate d xs)
+  where translateChar [] _     = "_"
+        translateChar (d:ds) c
+          | c == (fst d) = snd d
+          | otherwise    = translateChar ds c
 
+-- produces a Huffman Coding tree from a string
+huffmanTree :: [Char] -> BinaryTree Entry
+huffmanTree = (head . formTree . makeEntryLeaves . entrySort . letterFrequency)
+
+-- produces a reference dictionary from a string
+huffmanDictionary :: [Char] -> Dictionary
+huffmanDictionary = makeDictionary . huffmanTree
+
+-- produces the Huffman Coding of a given string
+huffmanCoding :: [Char] -> [Char]
+huffmanCoding s = translate (huffmanDictionary s) s
+
+-- computes the efficiency of the Huffman Coding
+huffmanEfficiency :: [Char] -> (Int, Int)
+huffmanEfficiency s = (length $ huffmanCoding s, 8 * (length s))
