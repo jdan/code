@@ -15,3 +15,4 @@ stripeCTF
 *.hi
 *.o
 main
+99problems/

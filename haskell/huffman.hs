@@ -84,3 +84,4 @@ huffmanCoding s = translate (huffmanDictionary s) s
 -- computes the efficiency of the Huffman Coding
 huffmanEfficiency :: [Char] -> (Int, Int)
 huffmanEfficiency s = (length $ huffmanCoding s, 8 * (length s))
+
