@@ -10,9 +10,10 @@ ProjectEuler
 *.out
 node_modules
 qsort
-koans
+koans/
 stripeCTF
 *.hi
 *.o
 main
 99problems/
+clojure-koans/
