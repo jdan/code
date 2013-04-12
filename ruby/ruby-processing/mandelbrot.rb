@@ -4,27 +4,32 @@
 
 class Mandelbrot < Processing::App
 
+  WIDTH  = 1920
+  HEIGHT = 1080
+
   # default size 900x600
   # no need to loop
   def setup
-    size 900, 600
+    size WIDTH, HEIGHT
     no_loop
   end
   
   # main drawing method
   def draw
-    (0..900).each do |x|
-      (0..600).each do |y|
+    (0..WIDTH).each do |x|
+      (0..HEIGHT).each do |y|
         # for a zoomed in spiral...
-        #   c = Complex.new(map(x, 0, 900, -0.745767, -0.743367), map(y, 0, 600, 0.120401, 0.122001))
+        c = Complex.new(map(x, 0, WIDTH, -0.745767, -0.743367), map(y, 0, HEIGHT, 0.120401, 0.122001))
         # and set the max to 120
-        c = Complex.new(map(x, 0, 900, -3, 1.5), map(y, 0, 600, -1.5, 1.5))
+        # c = Complex.new(map(x, 0, 900, -3, 1.5), map(y, 0, 600, -1.5, 1.5))
     
         # mandel will return 0 to 20 (20 is strong)
         #   map this to 0, 255 (and flip it)
-        set(x, y, color(255 - map(mandel(c,20), 0, 20, 0, 255).to_i))
+        set(x, y, color(255 - map(mandel(c, 180), 0, 180, 0, 255).to_i))
       end
     end
+
+    save('mandel.png')
   end
 
   # maps a value in one range to another

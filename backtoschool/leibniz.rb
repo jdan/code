@@ -1,0 +1,1 @@
+gets.to_i.times{p (0...gets.to_i).to_a.inject(0){|r,e|r+((-1.0)**e/(2*e+1))}}
