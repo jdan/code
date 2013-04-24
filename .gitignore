@@ -17,3 +17,4 @@ stripeCTF
 main
 99problems/
 clojure-koans/
+*.beam
