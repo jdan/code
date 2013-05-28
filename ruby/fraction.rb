@@ -11,11 +11,13 @@ end
 
 class Fraction
 
+  include Comparable
+
   attr_reader :numer, :denom
 
   def initialize(numer = 1, denom = 1)
-    @numer = numer
-    @denom = denom
+    @numer = numer.to_i
+    @denom = denom.to_i
 
     reduce!
   end
@@ -71,6 +73,16 @@ class Fraction
     self
   end
 
+  # comparator
+  def <=> other
+    @numer * other.denom <=> other.numer * @denom
+  end
+
+  # to float
+  def to_f
+    @numer.to_f / @denom
+  end
+
   # display
   def to_s
     "#{@numer} / #{@denom}"
@@ -78,7 +90,9 @@ class Fraction
 
   private
   def gcd(a, b)
-    if a == b
+    if a <= 1 || b <= 1
+      1
+    elsif a == b
       a
     elsif a > b
       gcd(a-b, b)
