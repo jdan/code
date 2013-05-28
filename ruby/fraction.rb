@@ -2,18 +2,13 @@
 # by Jordan Scales (http://jordanscales.com)
 # 27 May 2013
 
-class Object
-  def attr_alias _alias, _orig
-    alias_method _alias, _orig              if defined? _orig
-    alias_method "#{_alias}=", "#{_orig}="  if defined? "#{_orig}"
-  end
-end
-
 class Fraction
 
   include Comparable
 
   attr_reader :numer, :denom
+  alias :numerator    :numer
+  alias :denominator  :denom
 
   def initialize(numer = 1, denom = 1)
     @numer = numer.to_i
@@ -21,24 +16,6 @@ class Fraction
 
     reduce!
   end
-
-  # Setter methods
-  # fraction reduces after setting
-  def numer= numer
-    @numer = numer
-
-    reduce!
-  end
-
-  def denom= denom
-    @denom = denom
-
-    reduce!
-  end
-
-  # alias the methods
-  attr_alias :numerator, :numer
-  attr_alias :denominator, :denom
 
   # math functions
 
