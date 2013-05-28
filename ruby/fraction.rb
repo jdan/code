@@ -17,7 +17,7 @@ class Fraction
     @numer = numer
     @denom = denom
 
-    reduce
+    reduce!
   end
 
   # Setter methods
@@ -25,18 +25,31 @@ class Fraction
   def numer= numer
     @numer = numer
 
-    reduce
+    reduce!
   end
 
   def denom= denom
     @denom = denom
 
-    reduce
+    reduce!
   end
 
   # alias the methods
   attr_alias :numerator, :numer
   attr_alias :denominator, :denom
+
+  # math functions
+
+  # returns a new fraction, equivalent to its inverse
+  def inv
+    Fraction.new @denom, @numer
+  end
+
+  # inverts a given fraction (persistent)
+  def inv!
+    @numer, @denom = @denom, @numer
+    self
+  end
 
   # display
   def to_s
@@ -54,10 +67,18 @@ class Fraction
     end
   end
 
+  # returns the reduced fraction
   def reduce
+    g = gcd(@numer, @denom)
+    Fraction.new @numer / g, @denom / g
+  end
+
+  # reduces a fraction (persistent)
+  def reduce!
     g = gcd(@numer, @denom)
     @numer /= g
     @denom /= g
+    self
   end
 
 end
