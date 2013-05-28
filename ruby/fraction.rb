@@ -40,6 +40,26 @@ class Fraction
 
   # math functions
 
+  # adds a given fraction
+  def + other
+    Fraction.new @numer * other.denom + other.numer * @denom, @denom * other.denom
+  end
+
+  # subtracts a given function
+  def - other
+    Fraction.new @numer * other.denom - other.numer * @denom, @denom * other.denom
+  end
+
+  # multiplies a given fraction
+  def * other
+    Fraction.new @numer * other.numer, @denom * other.denom
+  end
+
+  # divides a given fraction
+  def / other
+    self * other.inv
+  end
+
   # returns a new fraction, equivalent to its inverse
   def inv
     Fraction.new @denom, @numer
@@ -65,12 +85,6 @@ class Fraction
     else
       gcd(a, b-a)
     end
-  end
-
-  # returns the reduced fraction
-  def reduce
-    g = gcd(@numer, @denom)
-    Fraction.new @numer / g, @denom / g
   end
 
   # reduces a fraction (persistent)
