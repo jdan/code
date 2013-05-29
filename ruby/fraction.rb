@@ -11,8 +11,19 @@ class Fraction
   alias :denominator  :denom
 
   def initialize(numer = 1, denom = 1)
+    # only integer arguments
     @numer = numer.to_i
     @denom = denom.to_i
+
+    # handle denominator of 0
+    if @denom == 0
+      raise ZeroDivisionError
+    # handle negatives
+    elsif @denom < 0
+      # let the numerator show the negative sign
+      @numer *= -1
+      @denom *= -1
+    end
 
     reduce!
   end
@@ -67,7 +78,13 @@ class Fraction
 
   private
   def gcd(a, b)
-    if a <= 1 || b <= 1
+    a = a.abs
+    b = b.abs
+
+    return b if a == 0
+    return a if b == 0
+
+    if a == 1 || b == 1
       1
     elsif a == b
       a
