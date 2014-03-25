@@ -15,7 +15,7 @@ class Game:
     def __init__(self, title, password, player):
         self.title = title
         self.password = password
-        
+
         m = hashlib.md5()
         m.update(self.password)
         self.id = m.hexdigest()[:8]
@@ -25,9 +25,9 @@ class Game:
         self.chat = []
         self.turn = random.randint(0, 1)
         self.score = [0, 0]
-        
+
         self.chat.append([admin.name, 'We\'re waiting on one more player!'])
-    
+
     def add_player(self, player):
         self.players.append(player)
         if len(self.players) == 2:
@@ -36,7 +36,7 @@ class Game:
 
     def add_chat(self, player, text):
         self.chat.append([player.name, text])
-        
+
     def make_move(self, player, word):   # assuming a valid move has been made
         if len(self.moves) > 0 and self.moves[-1][1] == 'wf':
             if word == 'wf':
@@ -49,7 +49,7 @@ class Game:
                 self.add_chat(admin, '%s wins the round! with "%s"' % (player.name, word))
                 self.add_chat(admin, 'The score is now %s: %s points, %s: %s points' % (self.players[0].name, self.score[0], self.players[1].name, self.score[1]))
                 self.reset()
-        
+
             return
 
         self.moves.append([player.name, word])
@@ -95,7 +95,7 @@ def main():
     output += '<div style="margin: 10px; float: right"><a href="/register">Create a New Room</a></div>'
     output += '<table cellspacing="3">'
     output += '<tr><th width="25%" style="text-align: left">Room</th><th width="25%" style="text-align: left">Players</th><th width="25%" style="text-align: left">Last Move</th></tr>'
-    
+
     for game in games:
         output += '<tr><td><a href="/game/%s">%s</a></td><td>%s</td>' % (game.id, game.title, game.get_players())
         if len(game.moves) > 0:
@@ -106,7 +106,7 @@ def main():
         else:
             output += '<td>Waiting...</td></tr>'
     output += '</table>'
-    output += '<br /><br /><br /><a href="/whatis">Need Help?</a>'    
+    output += '<br /><br /><br /><a href="/whatis">Need Help?</a>'
 
     output += '</body></html>'
     return output
@@ -122,7 +122,7 @@ def game(code):
         return 'Sorry, game not found.<br /><br /><a href="../../">Return</a>'
     output = '<html><head><title>' + g.title + '</title>'
     output += '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>'
-    output += '''<script type="text/javascript">   
+    output += '''<script type="text/javascript">
     function submit_chat(text, game_id, your_id) {
         $.get('../../chat/'+game_id+your_id+'/'+escape(text));
         $("#chatinp").val('');
@@ -158,7 +158,7 @@ def game(code):
     }
 
     var myid = '%s';
-    
+
     setInterval("update_chat(myid)", 2000);
     setInterval("update_gamefield(myid)", 2000);
     </script>''' % g.id
@@ -179,15 +179,15 @@ def game(code):
         output += '<input type="text" size="50" id="inp" />'
         output += '<input type="button" value="Submit" onclick="submit_answer(document.getElementById(\'inp\').value, \'%s\', \'%s\')" />' % (code[:8], code[8:])
         output += '<span id="submit_result" style="color: red"></span><br />Type <span style="font-family: lucida console; font-size: 80%">wf</span> to pass!'
-    
-    output += '<br /><br /><a href="../../">Return to Index</a>' 
+
+    output += '<br /><br /><a href="../../">Return to Index</a>'
     output += '</div>'
 
     output += '<div id="rightside" style="width: 40%; float: right; margin-right: 30px;">'
     output += '<div id="chat" style="border: 1px solid #000; height: 400px; width: 100%; padding: 3px; overflow: auto"></div>'
     if show_inputs:
         output += '<input type="text" size="35" id="chatinp" /><input type="button" value="Send" onclick="submit_chat(document.getElementById(\'chatinp\').value, \'%s\', \'%s\')" />' % (code[:8], code[8:])
-    output += '</div>'    
+    output += '</div>'
 
     output += '</body></html>'
     return output
@@ -240,11 +240,11 @@ def get_chat(code):
     output = ''
     for c in g.chat:
         col = ['black', 'blue'][c[0] == 'Administrator']
-        output += ('<span style="color:%s">' % col) + c[0] + ': ' + c[1] + '</span><br />'    
+        output += ('<span style="color:%s">' % col) + c[0] + ': ' + c[1] + '</span><br />'
     output += '<br />'
 
     return output
-        
+
 @route('/get_moves/:code')
 def get_moves(code):
     for gam in games:
@@ -256,7 +256,7 @@ def get_moves(code):
         redirect('/game/' + code)
 
     output = '<table cellspacing="3">'
-    for move in g.moves: 
+    for move in g.moves:
         output += '<tr style="color: %s"><td style="width: 200px">%s played...</td><td><pre>%s</pre></td></tr>' % ('red' if move[0] == g.players[0].name else 'blue', move[0], 'PASSED' if move[1] == 'wf' else move[1])
     output += '</table><br />'
     return output
@@ -277,7 +277,7 @@ def submit(code, text):
             break
     if p.id <> player_id:
         return 'Invalid Player ID'
-    
+
     # by this time, the game ID and player ID are valid, now let's check the move
     last_move = g.moves[-1][1]
     if last_move == 'wf':
@@ -308,7 +308,7 @@ def submit(code, text):
         return 'Sorry, you must either substitute a letter or add one.'
     if text == last_move + 's':
         return 'Sorry, you cannot make the word plural.'
-    
+
     current_move_chars = list(text)
     last_move_chars = list(last_move)
     if len(last_move) <> len(text):
@@ -328,7 +328,7 @@ def submit(code, text):
                 return 'Sorry, you added an invalid character.'
         else:
             return 'Sorry you must either substitute a letter or add one.'
-    
+
     # finally, check that it's a word.
     r = open(r'dict/%s.txt' % text[0])
     found = False
@@ -362,7 +362,7 @@ def chat(code, text):
             break
     if g.id <> game_id:
         redirect('/game/' + game_id)
-    
+
     for player in g.players:
         p = player
         if p.id == player_id:
@@ -388,7 +388,7 @@ def goto(game_id, player_pass):
         redirect('/game/' + g.id + p.id)
     else:
         redirect('/game/' + g.id)
-    
+
 @route('/register')
 def register():
     output = '<html><head><title>Create a New Game</title></head><body>'
@@ -437,23 +437,23 @@ h1 {
 <body>
 <div id="container">
 <h1>What is Wippen?</h1>
-<p>Wippen is a simple game I created in middle school several years ago with some friends. Since then 
+<p>Wippen is a simple game I created in middle school several years ago with some friends. Since then
 
 it's become a great way to waste time during class, since all you need is a piece of paper and a pencil.</p>
-<p>While the idea was not stolen, it may not be original, since it is a fairly <i>obvious</i> game. So don't be 
+<p>While the idea was not stolen, it may not be original, since it is a fairly <i>obvious</i> game. So don't be
 
 surprised if you've played a game like this before, or if you come across it one day by a different name.</p>
-<p>Since I love the game so much, I took the time to make a webapp where people can play each other over the 
+<p>Since I love the game so much, I took the time to make a webapp where people can play each other over the
 
 internet. Word validation and scoring is all automated.</p>
 
 <h1>So how do I play?</h1>
 <p>We'll talk about joining and creating rooms later. For now, let's focus on game mechanics.</p>
-<p>Wippen starts with a randomly chosen two-letter word. Unfortunately, words like "ox" and "qi" lead to some 
+<p>Wippen starts with a randomly chosen two-letter word. Unfortunately, words like "ox" and "qi" lead to some
 
-pretty boring games. I'm working on this. Players take turns adding a letter to the word, forming a different 
+pretty boring games. I'm working on this. Players take turns adding a letter to the word, forming a different
 
-word each time. If necessary, the player can rearrange the letters, but can only (and must) add one letter. The 
+word each time. If necessary, the player can rearrange the letters, but can only (and must) add one letter. The
 
 only rule to this is that you cannot simply add an s to make a word plural. For instance...</p>
 <pre>
@@ -462,26 +462,26 @@ only rule to this is that you cannot simply add an s to make a word plural. For 
 1: read
 2: reads (XXX)
 </pre>
-<p>Is <b>not</b> okay. Here, player 2 went ahead and added an s to make "read" into "reads." Why is this not 
+<p>Is <b>not</b> okay. Here, player 2 went ahead and added an s to make "read" into "reads." Why is this not
 
-allowed? Because with each turn it becomes harder to think of a new word, and we want to keep it that way. It's 
+allowed? Because with each turn it becomes harder to think of a new word, and we want to keep it that way. It's
 
-also in place to keep word choices original. Keep in mind that if player 2 had rearranged the word "read" 
+also in place to keep word choices original. Keep in mind that if player 2 had rearranged the word "read"
 
 before adding an s, it would've been accepted (i.e. "dares" or "dears")</p>
 
-<p>One other rule we have added is that once the word reaches <b>7 characters</b>, the player has the 
+<p>One other rule we have added is that once the word reaches <b>7 characters</b>, the player has the
 
-opportunity to remove a character before adding a different one. Essentially, the player may either add a 
+opportunity to remove a character before adding a different one. Essentially, the player may either add a
 
-letter, or just substitute one. This makes for much longer-lasting rounds and higher-scoring wins. Please note 
+letter, or just substitute one. This makes for much longer-lasting rounds and higher-scoring wins. Please note
 
 that a word can only be played <b>once</b> per round.</p>
 
 <h1>So how do I win a round?</h1>
-<p>If a player is unable to think of a word, he or she may enter "wf" (short for whiteflag: no quotes) to pass. 
+<p>If a player is unable to think of a word, he or she may enter "wf" (short for whiteflag: no quotes) to pass.
 
-If the other player then enters a valid move, that other player wins. If both players pass, the round ends in a 
+If the other player then enters a valid move, that other player wins. If both players pass, the round ends in a
 
 draw, and the winning bonus points carry onto the next round.</p>
 
@@ -515,16 +515,16 @@ Player 1 wins!!
 </pre>
 
 <h1>This all sounds great, so how do I get started?</h1>
-<p>Head on over to the <a href="../">Lobby</a> and join a game. To do so, you must enter the room's password, 
+<p>Head on over to the <a href="../">Lobby</a> and join a game. To do so, you must enter the room's password,
 
-as decided by the room creator (we don't have public rooms yet). Then create a username and 
+as decided by the room creator (we don't have public rooms yet). Then create a username and
 
-password. These are only temporary, and are in place so you can log into your game from anywhere. Alternatively, 
+password. These are only temporary, and are in place so you can log into your game from anywhere. Alternatively,
 
 you can also make your own room!</p>
-<p>Once a room has 2 players, the game can start. The "Administrator" (the room's robot) will take care of 
+<p>Once a room has 2 players, the game can start. The "Administrator" (the room's robot) will take care of
 
-choosing a random starting word, as well as the scoring and notifying you when it's your turn. You can also 
+choosing a random starting word, as well as the scoring and notifying you when it's your turn. You can also
 
 chat on the right side of the page.</p>
 
@@ -532,11 +532,11 @@ chat on the right side of the page.</p>
 <p>Wippen is still being developed, and therefore is pretty ugly (but hey, it's functional). Some words are
 missing, especially long words with added prefixes or suffixes, so we're working on that as well. If you do
 catch any bugs, please report them to the email address listed below.</p>
-<p>Wippen was developed by Jordan Scales using Python 2.7 and the <a href="http://bottle.paws.de">bottle</a> 
+<p>Wippen was developed by Jordan Scales using Python 2.7 and the <a href="http://bottle.paws.de">bottle</a>
 
 microweb framework. Feel free to send any comments or questions to scalesjordan (at) gmail.com. Enjoy!</p>
 </div>
 </body>
 </html>'''
 
-run(host='155.246.130.63', port='7777')
+run(host='127.0.0.1', port='7777')
