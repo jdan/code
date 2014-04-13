@@ -18,3 +18,4 @@ main
 99problems/
 clojure-koans/
 *.beam
+output*
